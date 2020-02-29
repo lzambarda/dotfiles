@@ -1,0 +1,8 @@
+To write a git extension some conditions must be satisfied:
+
+    1) the name must be git-[EXTENSION]
+    2) the file has to be in the PATH
+    3) the file has to be executable
+    
+Once done you can simply type "git [EXTENSION]" and it will be executed.
+It does not really matter if the file is a bash, ruby or python script.

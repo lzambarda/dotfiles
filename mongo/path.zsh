@@ -1,1 +1,1 @@
-export PATH=/Users/lucazambarda/mongodb/bin:$PATH
+export PATH=$HOME/mongodb/bin:$PATH

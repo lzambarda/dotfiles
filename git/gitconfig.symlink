@@ -1,28 +1,51 @@
 [user]
-        name = Luca Zambarda
-        email = luca@blokur.com
-        signingkey = F4A4BC7E51D8C02C
+	name = Luca Zambarda
+	email = luca@blokur.com
+	signingkey = F4A4BC7E51D8C02C
 [core]
-        excludesfile = /Users/lucazambarda/.gitignore
+	excludesfile = $HOME/.gitignore
 [difftool "sourcetree"]
-        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-        path = 
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [mergetool "sourcetree"]
-        cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-        trustExitCode = true
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [commit]
-        template = /Users/lucazambarda/.stCommitMsg
-        gpgsign = true
+	template = /Users/lucazambarda/.stCommitMsg
+	gpgsign = true
 [filter "lfs"]
-        clean = git-lfs clean -- %f
-        smudge = git-lfs smudge -- %f
-        process = git-lfs filter-process
-        required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [push]
-        default = simple
+	default = upstream
 [tag]
-        gpgsign = true
+	gpgsign = true
 [gpg]
-        program = /Applications/SourceTree.app/Contents/Resources/bin/stgpg.sh
+	program = /Applications/SourceTree.app/Contents/Resources/bin/stgpg.sh
 [url "git@github.com:"]
-        insteadOf = https://github.com/
+	insteadOf = https://github.com/
+[alias]
+    st = status
+    co = checkout
+    aliases = "!git config -l | grep alias | cut -c 7-"
+    ls = "log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate"
+    undo = reset HEAD~1 --mixed
+    lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    wip = commit --no-gpg-sign -am "WIP"
+    up = !git pull --rebase --prune
+    save = !git add -A && git commit --no-gpg-sign -m 'SAVEPOINT'
+    # wipe will create an untracked commit in case later you want to find it # from reflogs.
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+    conflicts = "!git ls-files -u | awk '{print $4}' | sort -u"
+    ignored = !git ls-files --others --i --exclude-standard
+	sync = "!git checkout master && \
+		git pull upstream master && \
+		git push origin master && \
+		git fetch --prune --all && \
+		git branch -vv | \
+		grep ': gone]'| \
+		grep -v \\* | \
+		awk '{ print $1; }' | \
+		xargs git branch -D"
