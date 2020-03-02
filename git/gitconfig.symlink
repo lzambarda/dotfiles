@@ -11,7 +11,7 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	template = /Users/lucazambarda/.stCommitMsg
+	template = $HOME/.stCommitMsg
 	gpgsign = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f

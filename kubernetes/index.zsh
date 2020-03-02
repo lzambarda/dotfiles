@@ -10,4 +10,17 @@ export AWS_AZ_3=${AWS_REGION}c
 export AWS_MASTER_REGION=${AWS_AZ_1},${AWS_AZ_2},${AWS_AZ_3}
 export KOPS_STATE_STORE=s3://${BUCKET_NAME}
 
-if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi
+function helm() {
+    if ! type __start_helm >/dev/null 2>&1; then
+        source <(command helm completion zsh)
+    fi
+    command helm "$@"
+}
+
+function kubectl() {
+    if ! type __start_kubectl >/dev/null 2>&1; then
+        source <(command kubectl completion zsh)
+    fi
+
+    command kubectl "$@"
+}
