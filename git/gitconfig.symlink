@@ -3,7 +3,7 @@
 	email = luca@blokur.com
 	signingkey = F4A4BC7E51D8C02C
 [core]
-	excludesfile = $HOME/.gitignore
+	excludesfile = /Users/lucazambarda/.gitignore
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

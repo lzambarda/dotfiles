@@ -117,3 +117,5 @@ done
 for file in $(find $DOTFILES -mindepth 2 -maxdepth 2 -not -path '*.git*' -name index.zsh); do
     source $file
 done
+
+source $DOTFILES/zen/poem.zsh
