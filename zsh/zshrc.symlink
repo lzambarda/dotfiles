@@ -15,6 +15,9 @@ export ZSH="$HOME/dotfiles/zsh/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="oxide"
 
+# Do not share history between sessions
+unsetopt SHARE_HISTORY
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -108,6 +111,10 @@ source $ZSH/oh-my-zsh.sh
 
 export DOTFILES=$HOME/dotfiles
 
+# Set sublime as default visual editor
+export VISUAL="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w -n"
+export EDITOR=$VISUAL
+
 # source the path.zsh files first
 for file in $(find $DOTFILES -mindepth 2 -maxdepth 2 -not -path '*.git*' -name path.zsh); do
     source $file
@@ -118,4 +125,4 @@ for file in $(find $DOTFILES -mindepth 2 -maxdepth 2 -not -path '*.git*' -name i
     source $file
 done
 
-source $DOTFILES/zen/poem.zsh
+poem
