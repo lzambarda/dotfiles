@@ -49,3 +49,4 @@
 		grep -v \\* | \
 		awk '{ print $1; }' | \
 		xargs git branch -D"
+	synctags = git tag -l | xargs git tag -d && git fetch --tags

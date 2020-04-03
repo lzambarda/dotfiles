@@ -7,4 +7,5 @@ set -e
 cd "$(dirname $0)"/..
 
 # find the installers and run them iteratively
+sh -c ./homebrew/install.sh # Some other installs may need homebrew installed
 find . -name install.sh | while read installer ; do sh -c "${installer}" ; done

@@ -15,9 +15,6 @@ export ZSH="$HOME/dotfiles/zsh/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="oxide"
 
-# Do not share history between sessions
-unsetopt SHARE_HISTORY
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -115,14 +112,26 @@ export DOTFILES=$HOME/dotfiles
 export VISUAL="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w -n"
 export EDITOR=$VISUAL
 
+# Do not share history between sessions
+unsetopt SHARE_HISTORY
+
 # source the path.zsh files first
-for file in $(find $DOTFILES -mindepth 2 -maxdepth 2 -not -path '*.git*' -name path.zsh); do
+for file in $(find $DOTFILES -mindepth 2 -maxdepth 4 -not -path '*.git*' -name path.zsh); do
     source $file
 done
 
 # source all zsh index files
-for file in $(find $DOTFILES -mindepth 2 -maxdepth 2 -not -path '*.git*' -name index.zsh); do
+for file in $(find $DOTFILES -mindepth 2 -maxdepth 4 -not -path '*.git*' -name index.zsh); do
     source $file
 done
 
-poem
+setupgimme
+
+# Code for once a day evaluation
+if [ ! -f $DOTFILES/onceaday ] || [ $(find $DOTFILES -mtime +0 -name "onceaday") ]; then
+    touch -t $(date +%Y%m%d0000) $DOTFILES/onceaday # Set to beginning of today
+    poem
+fi
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

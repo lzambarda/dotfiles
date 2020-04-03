@@ -3,7 +3,7 @@ senv() {
         echo "Error, usage is: senv <file>"
         return 1
     fi
-    if [ $1 = "--help" ]; then
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
         echo "Exports every variable inside an environment file in the format KEY=VALUE"
         return 0
     fi
