@@ -10,3 +10,5 @@ fi
 
 echo "› sudo softwareupdate -i -a"
 sudo softwareupdate -i -a
+
+sh ./set-defaults.sh

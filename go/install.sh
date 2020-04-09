@@ -1,10 +1,6 @@
-if test ! $(which gimme)
+if test ! $(which gvm)
 then
-    if test "$(uname)" = "Darwin"
-    then
-        brew install gimme
-    else
-        curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme
-        chmod +x ~/bin/gimme
-    fi
+    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+    source $HOME/.gvm/scripts/gvm
+    gvm install go1.13
 fi
