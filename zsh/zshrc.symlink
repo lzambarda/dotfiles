@@ -132,6 +132,3 @@ if [ ! -f $DOTFILES/onceaday ] || [ $(find $DOTFILES -mtime +0 -name "onceaday")
     touch -t $(date +%Y%m%d0000) $DOTFILES/onceaday # Set to beginning of today
     poem
 fi
-
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
