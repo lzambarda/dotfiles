@@ -40,7 +40,7 @@
     wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
     conflicts = "!git ls-files -u | awk '{print $4}' | sort -u"
     ignored = !git ls-files --others --i --exclude-standard
-	sync = "!git checkout master && \
+    sync = "!git checkout master && \
 		git pull upstream master && \
 		git push origin master && \
 		git fetch --prune --all && \
@@ -49,4 +49,4 @@
 		grep -v \\* | \
 		awk '{ print $1; }' | \
 		xargs git branch -D"
-	synctags = git tag -l | xargs git tag -d && git fetch --tags
+    synctags = "!git tag -l | xargs git tag -d && git fetch --tags"

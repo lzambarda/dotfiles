@@ -1,5 +1,5 @@
 export GOPATH=$HOME/go
-export GO111MODULE=on
+export GO111MODULE=auto
 export GOPROXY=direct # For compatibility with gimme
 export GOSUMDB=off    # For compatibility with gimme
 export GIMME_DEFAULT_GO_VERSION=1.13
