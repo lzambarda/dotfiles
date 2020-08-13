@@ -3,7 +3,20 @@
 # a function by the same name. When first invoked in a session, unset the
 # wrapper, load the real nvm, and invoke it with the provided parameters.
 nvm() { 
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	unset -f nvm
+	_load_nvm
     nvm "$@"
+}
+
+# Same with node
+node() {
+	unset -f node
+	_load_nvm
+   	node "$@"
+}
+
+_load_nvm() {
+	echo "dotfiles: loading nvm..."
+	export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 }
