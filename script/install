@@ -6,6 +6,15 @@ set -e
 
 cd "$(dirname $0)"/..
 
+echo "Running installers"
+
 # find the installers and run them iteratively
+echo "Installing homebrew ..."
 sh -c ./homebrew/install.sh # Some other installs may need homebrew installed
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+
+find . -path ./homebrew -prune -false -o -name install.sh | while read installer ; do
+	echo "Installing $(basename $(dirname $installer)) ..."
+	sh -c "${installer}"
+done
+
+echo "Finished!"

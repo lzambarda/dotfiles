@@ -1,0 +1,17 @@
+#https://gist.github.com/simme/1297707
+
+echo "Ahoy"
+#set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+# List of plugins                                                                                                                                                                                 
+set -g @tpm_plugins '        \                                                                                                                                                                 
+tmux-plugins/tpm             \                                                                                                                                                                 
+tmux-plugins/tmux-sensible   \                                                                                                                                                                 
+tmux-plugins/tmux-resurrect  \                                                                                                                                                               '                                                                                                                                                                                                
+
+# The following lines will install the plugin system on tmux
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'

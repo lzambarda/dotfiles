@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-curl -o- -L https://yarnpkg.com/install.sh | bash
+if test ! $(which yarn)
+then
+	# curl -o- -L https://yarnpkg.com/install.sh | bash
+  	brew install yarn
+fi

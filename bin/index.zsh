@@ -11,5 +11,6 @@ senv() {
         echo "Error, file does not exist or it is not a file: $1"
         return 1
     fi
-    eval $(cat $1 | sed 's/^/export /')
+    #eval $(cat $1 | sed 's/^/export /')
+    eval $(cat $1 | grep -E '^[A-Z_]+=\S+' | sed 's/^/export /')
 }
