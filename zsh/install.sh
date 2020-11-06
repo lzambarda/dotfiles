@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+echo "Installing zsh, zsh-completions..."
 brew install zsh zsh-completions
 
 #source <(k completion zsh)
@@ -12,3 +13,11 @@ if [ -z $(grep "$(which zsh)" /etc/shells) ]; then
 fi
 
 chsh -s $(which zsh)
+
+if [ ! -f $ZSH/oh-my-zsh.sh ]; then
+    echo "Installing oh my zsh..."
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    echo "Installing auto zsh-autosuggestions..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
