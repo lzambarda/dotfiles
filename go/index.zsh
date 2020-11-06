@@ -8,7 +8,10 @@ setupgimme() {
     if [ -z ${GIMME_DEFAULT_GO_VERSION+x} ]; then
         echo "dotfiles: GIMME_DEFAULT_GO_VERSION not set, skipping\n"
     else
-    	echo "dotfiles: Downloading go ${GIMME_DEFAULT_GO_VERSION}..."
+    	# Too slow
+    	# if [ -z "$(gimme list &>/dev/null | grep $GIMME_DEFAULT_GO_VERSION)" ]; then
+    	# 	echo "dotfiles: Downloading go ${GIMME_DEFAULT_GO_VERSION}..."
+    	# fi
         eval "$(gimme $GIMME_DEFAULT_GO_VERSION)" 2>/dev/null
     fi
 }
