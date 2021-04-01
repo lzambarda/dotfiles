@@ -1,1 +1,1 @@
-export DOCKER_BUILDKIT=0
+export DOCKER_BUILDKIT=1

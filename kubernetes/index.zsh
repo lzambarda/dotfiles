@@ -24,3 +24,8 @@ function kubectl() {
 
     command kubectl "$@"
 }
+
+function k_job_from_cron() {
+	kubectl create job --from="$1" "$2"
+}
+alias kjfc=k_job_from_cron

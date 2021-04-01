@@ -17,3 +17,6 @@ loadenv() {
     #eval $(cat $1 | sed 's/^/export /')
     eval $(cat $1 | grep -E '^[A-Z_]+=\S+' | sed 's/^/export /')
 }
+
+# Pipe my public key to my clipboard.
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
