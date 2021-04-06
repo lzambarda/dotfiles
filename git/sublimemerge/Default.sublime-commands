@@ -1,0 +1,12 @@
+[
+	{
+		"caption": "Sync local branches with remote, delete merged",
+		"command": "git",
+  		"args": { "argv": ["sync"] }
+	},
+	{
+		"caption": "Sync tags with remote",
+		"command": "git",
+  		"args": { "argv": ["synctags"] }
+	}
+]
