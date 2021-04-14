@@ -1,5 +1,17 @@
 alias k=kubectl
 
+function k_dirty() {
+	kubectl get po --all-namespaces | grep -v -e "1\/1\|2\/2\|3\/3\|4\/4\|5\/5" | grep -v Completed
+}
+
+function k_pod_node() {
+	kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
+}
+
+function k_job_from_cron() {
+	kubectl create job --from="$1" "$2"
+}
+
 export AWS_REGION=eu-west-1
 export BUCKET_NAME=blokur-com-k8s-state-store
 export KOPS_DOMAIN=blokur.com
@@ -25,7 +37,3 @@ function kubectl() {
     command kubectl "$@"
 }
 
-function k_job_from_cron() {
-	kubectl create job --from="$1" "$2"
-}
-alias kjfc=k_job_from_cron
