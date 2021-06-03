@@ -13,9 +13,10 @@ loadenv() {
     fi
     CYAN=$'\033[0;36m'
 	NC=$'\033[0m'
-    cat $1 | grep -Ev '^\s*#' | sed -E "s/^([A-Z_]+)=.*$/set ${CYAN}\1${NC}/"
+    cat configs/dev.env | grep -Ev '^\s*#' | sed -E "s/^(export )?([A-Z_]+)=.*$/set ${CYAN}\2${NC}/"
     #eval $(cat $1 | sed 's/^/export /')
-    eval $(cat $1 | grep -E '^[A-Z_]+=\S+' | sed 's/^/export /')
+    eval $(cat configs/dev.env | grep -E '^[A-Z_]+=\S+' | sed 's/^/export /')
+    eval $(cat configs/dev.env | grep -E '^export [A-Z_]+=\S+')
 }
 
 # Pipe my public key to my clipboard.

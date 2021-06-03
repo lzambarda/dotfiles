@@ -3,6 +3,7 @@ alias k=kubectl
 function k_dirty() {
 	kubectl get po --all-namespaces | grep -v -e "1\/1\|2\/2\|3\/3\|4\/4\|5\/5" | grep -v Completed
 }
+alias kdirty=k_dirty
 
 function k_pod_node() {
 	kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
