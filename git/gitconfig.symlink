@@ -1,9 +1,8 @@
 [user]
 	name = Luca Zambarda
-	email = luca@blokur.com
-	signingkey = F4A4BC7E51D8C02C
+	email = luke.zambarda@gmail.com
 [core]
-	excludesfile = /Users/lucazambarda/.gitignore
+	excludesfile = /Users/lucazambarda/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -23,7 +22,7 @@
 [tag]
 	gpgsign = true
 [gpg]
-	program = /Applications/SourceTree.app/Contents/Resources/bin/stgpg.sh
+	program = gpg2
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [alias]

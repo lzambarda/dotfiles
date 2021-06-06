@@ -16,7 +16,9 @@ poem() {
             current_stanza=""
         fi
     done < $f
-
+    if [ ! -z $current_stanza ]; then
+        stanzas+=($current_stanza)
+    fi
     # Print a random stanza, if one was found
     if [ ! -z $author ]; then
         echo -en "\e[3;37m${stanzas[$RANDOM % ${#stanzas[@]} + 1 ]}\n~ $author" # arrays in zsh start at 1
