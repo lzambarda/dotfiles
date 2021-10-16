@@ -1,6 +1,7 @@
 [user]
 	name = Luca Zambarda
-	email = luke.zambarda@gmail.com
+	email = luca.zambarda@posteo.net
+	signingkey = 43C5C3582A9A4FDB
 [core]
 	excludesfile = /Users/lucazambarda/.gitignore_global
 [difftool "sourcetree"]

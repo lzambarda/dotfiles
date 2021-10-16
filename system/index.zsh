@@ -1,4 +1,4 @@
-export EDITOR='code'
+export EDITOR='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -wn'
 
 # GRC colorizes nifty unix tools all over the place
 if (( $+commands[grc] )) && (( $+commands[brew] ))

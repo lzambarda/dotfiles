@@ -13,6 +13,10 @@ function k_job_from_cron() {
 	kubectl create job --from="$1" "$2"
 }
 
+function k_breakdown() {
+    kubectl get po --all-namespaces -o=jsonpath="{range .items[*]}{.metadata.namespace}:{.metadata.name}{'\n'}{range .spec.containers[*]}  cpu req:{.resources.requests.cpu}{'\t'}  mem req:{.resources.requests.memory}{'\n'}{end}{end}"
+}
+
 export AWS_REGION=eu-west-1
 export BUCKET_NAME=blokur-com-k8s-state-store
 export KOPS_DOMAIN=blokur.com
