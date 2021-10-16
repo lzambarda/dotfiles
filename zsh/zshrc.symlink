@@ -135,4 +135,5 @@ setupgimme
 if [ ! -f $DOTFILES/onceaday ] || [ $(find $DOTFILES -mtime +0 -name "onceaday") ]; then
     touch -t $(date +%Y%m%d0000) $DOTFILES/onceaday # Set to beginning of today
     poem
+    checkgo
 fi
