@@ -43,5 +43,6 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Do not create .DS_Store files on network stores
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
+
 # Ignore duplicates in historical, see https://apple.stackexchange.com/questions/212412/how-can-i-set-the-mac-os-x-terminal-history-to-act-like-linux-when-using-up-down
 HISTCONTROL=erasedups

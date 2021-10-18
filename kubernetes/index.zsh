@@ -1,7 +1,7 @@
 alias k=kubectl
 
 function k_dirty() {
-	kubectl get po --all-namespaces | grep -v -e "1\/1\|2\/2\|3\/3\|4\/4\|5\/5" | grep -v Completed
+	watch 'kubectl get po --all-namespaces | grep -v -e "1\/1\|2\/2\|3\/3\|4\/4\|5\/5" | grep -v Completed'
 }
 alias kdirty=k_dirty
 
@@ -15,6 +15,16 @@ function k_job_from_cron() {
 
 function k_breakdown() {
     kubectl get po --all-namespaces -o=jsonpath="{range .items[*]}{.metadata.namespace}:{.metadata.name}{'\n'}{range .spec.containers[*]}  cpu req:{.resources.requests.cpu}{'\t'}  mem req:{.resources.requests.memory}{'\n'}{end}{end}"
+}
+
+function k_wipe_pods() {
+    if [ $# -ne "1" ]; then
+        echo "Error, usage is: k_wipe_pods <namespace>"
+        return 1
+    fi
+    for pod in $(kubectl get -n $1 pod | grep -oE "^[a-z0-9\-]+"); do
+        kubectl -n $1 delete --wait=false pod $pod
+    done
 }
 
 export AWS_REGION=eu-west-1
