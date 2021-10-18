@@ -50,3 +50,12 @@
 		awk '{ print $1; }' | \
 		xargs git branch -D"
     synctags = "!git tag -l | xargs git tag -d && git fetch --tags"
+    syncmain = "!git checkout main && \
+		git pull upstream main && \
+		git push origin main && \
+		git fetch --prune --all && \
+		git branch -vv | \
+		grep ': gone]'| \
+		grep -v \\* | \
+		awk '{ print $1; }' | \
+		xargs git branch -D"
