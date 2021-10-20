@@ -28,7 +28,7 @@ checkgo() {
         * ) echo "Huh?"; return 0;;
     esac
     # Update configfile
-    sed "s/WANTED_GO_VERSION=$WANTED_GO_VERSION/WANTED_GO_VERSION=$latest_version/" ~/dotfiles/go/index.zsh | tee ~/dotfiles/go/index.zsh > /dev/null
+    sed -i '' "s/WANTED_GO_VERSION=$WANTED_GO_VERSION/WANTED_GO_VERSION=$latest_version/" ~/dotfiles/go/index.zsh
     echo "Config updated, installing..."
     export WANTED_GO_VERSION=$latest_version
     setupgimme
