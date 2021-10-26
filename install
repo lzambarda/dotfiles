@@ -22,6 +22,10 @@ done
 
 echo "Stowing"
 
+if test ! $(which stow); then
+	brew install stow
+fi
+
 find . -path ./homebrew -prune -false -o -name .stow-local-ignore | while read stowfile ; do
 	target=$(basename $(dirname $stowfile))
 	echo "stowing $target"
