@@ -6,13 +6,18 @@ brew install zsh zsh-completions
 #source <(k completion zsh)
 # k completion zsh > ~/dotfiles/zsh/fpath/_kubectl
 
-
 if [ -z $(grep "$(which zsh)" /etc/shells) ]; then
 	echo "Registering $(which zsh) in /etc/shells ..."
 	sudo sh -c "echo $(which zsh) >> /etc/shells"
 fi
 
-chsh -s $(which zsh)
+if [ -z $(echo $SHELL | grep zsh) ]; then
+    echo "Setting zsh as the default shell..."
+    chsh -s $(which zsh)
+fi
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/dotfiles/zsh/.oh-my-zsh"
 
 if [ ! -f $ZSH/oh-my-zsh.sh ]; then
     echo "Installing oh my zsh..."

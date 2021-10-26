@@ -4,7 +4,7 @@ export GOPROXY=direct # For compatibility with gimme
 export GOSUMDB=off    # For compatibility with gimme
 export WANTED_GO_VERSION=1.17.2
 
-setupgimme() {
+setupgo() {
     if [ -z ${WANTED_GO_VERSION+x} ]; then
         echo "dotfiles: GIMME_DEFAULT_GO_VERSION not set, skipping\n"
     else

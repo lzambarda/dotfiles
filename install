@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Checking homebrew ..."
+
+# Check for Homebrew
+if test ! $(which brew); then
+	if test "$(uname)" = "Darwin"; then
+  		echo "Installing homebrew ..."
+ 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+fi
+
+echo "Running installers"
+
+# Find the installers and run them iteratively
+find . -path ./homebrew -prune -false -o -maxdepth 2 -name install.sh | while read installer ; do
+	echo "Installing $(basename $(dirname $installer)) ..."
+	sh -c "${installer}"
+done
+
+echo "Stowing"
+
+find . -path ./homebrew -prune -false -o -name .stow-local-ignore | while read stowfile ; do
+	target=$(basename $(dirname $stowfile))
+	echo "stowing $target"
+	stow -v $target
+done
+
+echo "Finished!"

@@ -1,0 +1,12 @@
+[
+	{
+		"caption": "Sync",
+		"command": "git",
+  		"args": { "argv": ["sync"] }
+	},
+	{
+		"caption": "Sync tags",
+		"command": "git",
+  		"args": { "argv": ["synctags"] }
+	}
+]
