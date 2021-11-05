@@ -2,7 +2,7 @@ export GOPATH=$HOME/go
 export GO111MODULE=on
 export GOPROXY=direct # For compatibility with gimme
 export GOSUMDB=off    # For compatibility with gimme
-export WANTED_GO_VERSION=1.17.2
+export WANTED_GO_VERSION=1.17.3
 
 setupgo() {
     if [ -z ${WANTED_GO_VERSION+x} ]; then
@@ -31,7 +31,7 @@ checkgo() {
     sed -i '' "s/WANTED_GO_VERSION=$WANTED_GO_VERSION/WANTED_GO_VERSION=$latest_version/" ~/dotfiles/go/index.zsh
     echo "Config updated, installing..."
     export WANTED_GO_VERSION=$latest_version
-    setupgimme
+    setupgo
 }
 
 gocover () {
