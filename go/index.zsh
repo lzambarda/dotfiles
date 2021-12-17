@@ -2,7 +2,7 @@ export GOPATH=$HOME/go
 export GO111MODULE=on
 export GOPROXY=direct # For compatibility with gimme
 export GOSUMDB=off    # For compatibility with gimme
-export WANTED_GO_VERSION=1.17.3
+export WANTED_GO_VERSION=1.17.5
 
 setupgo() {
     if [ -z ${WANTED_GO_VERSION+x} ]; then

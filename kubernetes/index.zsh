@@ -17,6 +17,7 @@ function k_breakdown() {
     kubectl get po --all-namespaces -o=jsonpath="{range .items[*]}{.metadata.namespace}:{.metadata.name}{'\n'}{range .spec.containers[*]}  cpu req:{.resources.requests.cpu}{'\t'}  mem req:{.resources.requests.memory}{'\n'}{end}{end}"
 }
 
+# A better alternative is k rollout -n hendrix-staging-1 restart deployment.apps/orchestrator-queue
 function k_wipe_pods() {
     if [ $# -ne "1" ]; then
         echo "Error, usage is: k_wipe_pods <namespace>"
