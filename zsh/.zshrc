@@ -43,7 +43,8 @@ setupgo
 # Code for once a day evaluation
 if [ ! -f $DOTFILES/onceaday ] || [ $(find $DOTFILES -mtime +0 -name "onceaday") ]; then
     touch -t $(date +%Y%m%d0000) $DOTFILES/onceaday # Set to beginning of today
-    poem
+    # poem
+    kao
     echo "Checking dotfiles updates..."
     git -C ~/dotfiles pull
     checkgo
