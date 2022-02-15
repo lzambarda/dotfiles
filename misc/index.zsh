@@ -21,3 +21,38 @@ loadenv() {
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+kao() {
+    emojis=(🍪 ☕️ 🍕 🍩 🍵 🥨 🍙 🌭 🍔 🥐 🥟 🥧 🍫 🥡)
+    used=${emojis[1 + $RANDOM % ${#emojis[@]}]}
+    if [ "$((RANDOM % 2))" = "0" ]; then
+    cat <<EOF
+ (\_(\\
+ ( •ω•)
+ /つ${used}つ
+EOF
+    else
+    cat <<EOF
+⠀ ⌒―-―⌒
+⠀( ･(ｪ)･)
+⠀/ つ${used}つ
+(＿__つ_つ
+EOF
+    fi
+}
+
+njq() {
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo "Usage is: njq <file> <js map reduce call>"
+        return 1
+    fi
+    if [ $# -ne "2" ]; then
+        echo "Error, usage is: njq <file> <js map reduce call>"
+        return 1
+    fi
+    if [ ! -f $1 ]; then
+        echo "Error, file does not exist or it is not a file: $1"
+        return 1
+    fi
+    node -p "JSON.parse(require('fs').readFileSync('$1').toString())$2"
+}
