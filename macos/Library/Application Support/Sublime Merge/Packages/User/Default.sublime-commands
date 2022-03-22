@@ -5,6 +5,11 @@
   		"args": { "argv": ["sync"] }
 	},
 	{
+		"caption": "Sync Fork",
+		"command": "git",
+  		"args": { "argv": ["syncfork"] }
+	},
+	{
 		"caption": "Sync tags",
 		"command": "git",
   		"args": { "argv": ["synctags"] }

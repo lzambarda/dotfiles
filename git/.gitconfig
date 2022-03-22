@@ -33,9 +33,17 @@
     wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
     conflicts = "!git ls-files -u | awk '{print $4}' | sort -u"
     ignored = !git ls-files --others --i --exclude-standard
-    sync = "!git checkout master && \
+    syncfork = "!git checkout master && \
 		git pull upstream master && \
 		git push origin master && \
+		git fetch --prune --all && \
+		git branch -vv | \
+		grep ': gone]'| \
+		grep -v \\* | \
+		awk '{ print $1; }' | \
+		xargs git branch -D"
+	sync = "!git checkout master && \
+		git pull origin master && \
 		git fetch --prune --all && \
 		git branch -vv | \
 		grep ': gone]'| \
