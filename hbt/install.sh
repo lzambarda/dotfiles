@@ -1,0 +1,1 @@
+ln -s ~/Repositories/hbt/zsh/hbt.zsh ~/dotfiles/hbt/index.zsh
