@@ -11,7 +11,7 @@ export ZSH="$HOME/dotfiles/zsh/.oh-my-zsh"
 
 ZSH_THEME="oxide"
 
-plugins=(git zsh-autosuggestions)
+plugins=(zsh-autosuggestions)
 
 if [ -f $ZSH/oh-my-zsh.sh ]; then
     source $ZSH/oh-my-zsh.sh
@@ -22,7 +22,7 @@ fi
 export DOTFILES=$HOME/dotfiles
 
 # Set sublime as default visual editor
-export VISUAL="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -w -n"
+export VISUAL="wafer-thin"
 export EDITOR=$VISUAL
 
 # Do not share history between sessions
@@ -43,9 +43,9 @@ setupgo
 # Code for once a day evaluation
 if [ ! -f $DOTFILES/onceaday ] || [ $(find $DOTFILES -mtime +0 -name "onceaday") ]; then
     touch -t $(date +%Y%m%d0000) $DOTFILES/onceaday # Set to beginning of today
-    # poem
-    kao
     echo "Checking dotfiles updates..."
     git -C ~/dotfiles pull
     checkgo
 fi
+
+kao

@@ -1,8 +1,6 @@
-if test ! $(which gimme); then
-    if test "$(uname)" = "Darwin"; then
-        brew install gimme
-    else
-        curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme
-        chmod +x ~/bin/gimme
-    fi      
+if test ! $(which g); then
+    source $(dirname $0)/path.zsh
+    curl -sSL https://raw.githubusercontent.com/stefanmaric/g/next/bin/g > $GOPATH/bin/g
+    chmod +x $GOPATH/bin/g
+    echo "g is installed, to uninstall simply remove it at $GOPATH/bin/go"
 fi

@@ -1,23 +1,20 @@
-export GOPATH=$HOME/go
-export GO111MODULE=on
-export GOPROXY=direct # For compatibility with gimme
-export GOSUMDB=off    # For compatibility with gimme
-export WANTED_GO_VERSION=1.18.2
+# g-install: do NOT edit, see https://github.com/stefanmaric/g
+export GOPATH="$HOME/go";
+export GOROOT="$HOME/.go";
+
+export PATH="$GOPATH/bin:$PATH"; 
+export WANTED_GO_VERSION=1.19
 
 setupgo() {
     if [ -z ${WANTED_GO_VERSION+x} ]; then
-        echo "dotfiles: GIMME_DEFAULT_GO_VERSION not set, skipping\n"
+        echo "dotfiles: WANTED_GO_VERSION not set, skipping\n"
     else
-        # Too slow for now
-    	# if [ -z "$(gimme list &>/dev/null | grep $WANTED_GO_VERSION)" ]; then
-    	#  	echo "dotfiles: Downloading go ${WANTED_GO_VERSION}..."
-    	# fi
-        eval "$(gimme $WANTED_GO_VERSION)" 2>/dev/null
+        g set $WANTED_GO_VERSION
     fi
 }
 
 checkgo() {
-    latest_version=$(gimme --known | grep -v "beta" | grep -v "rc" | tail -n1)
+    latest_version=$(g list-all | tail -n2 | head -1 | tr -d '>' | tr -d '[:space:]')
     if [ "$latest_version" = "$WANTED_GO_VERSION" ]; then
         return 0
     fi
@@ -28,10 +25,12 @@ checkgo() {
         * ) echo "Huh?"; return 0;;
     esac
     # Update configfile
-    sed -i '' "s/WANTED_GO_VERSION=$WANTED_GO_VERSION/WANTED_GO_VERSION=$latest_version/" ~/dotfiles/go/index.zsh
+    previous_version=$WANTED_GO_VERSION
+    sed -i '' "s/WANTED_GO_VERSION=$previous_version/WANTED_GO_VERSION=$latest_version/" ~/dotfiles/go/index.zsh
     echo "Config updated, installing..."
     export WANTED_GO_VERSION=$latest_version
-    setupgo
+    g install $WANTED_GO_VERSION
+    g remove $previous_version
 }
 
 gocover () {
@@ -40,4 +39,3 @@ gocover () {
         go tool cover -html=coverage.out
         rm -rf ./coverage.out
 }
-

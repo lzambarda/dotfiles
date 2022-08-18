@@ -23,22 +23,39 @@ loadenv() {
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 kao() {
-    emojis=(🍪 ☕️ 🍕 🍩 🍵 🥨 🍙 🌭 🍔 🥐 🥟 🥧 🍫 🥡)
-    used=${emojis[1 + $RANDOM % ${#emojis[@]}]}
-    if [ "$((RANDOM % 2))" = "0" ]; then
-    cat <<EOF
+    emojis=(🚰 ☕️ 🥡 🍪 🍕 🍩 🍵 🥨 🍙 🌭 🍔 🥐 🥟 🥧 🍫 )
+    index=$((1 + $RANDOM % ${#emojis[@]}))
+    used=${emojis[$index]}
+    case "$((RANDOM % 2))" in
+        "0")
+        cat <<EOF
+ ,00>${used}
+\|^|/
+ | |
+  \|
+EOF
+;;
+        "1")
+        cat <<EOF
  (\_(\\
  ( •ω•)
  /つ${used}つ
 EOF
-    else
-    cat <<EOF
-  ⌒―-―⌒
+        ;;
+        "2")
+        cat <<EOF
+  ⌒―-――⌒
  ( ･(ｪ)･)
  / つ${used}つ
 (＿__つ_つ
 EOF
-    fi
+        ;;
+    esac
+    case "$index" in
+        "1") echo -e "\e[3mr/hydrohomies\e[0m";;
+        "2") echo -e "\e[3mDamn fine coffee\e[0m";;
+        "3") echo -e "\e[3mAnd then?\e[0m";;
+    esac
 }
 
 njq() {
@@ -55,4 +72,12 @@ njq() {
         return 1
     fi
     node -p "JSON.parse(require('fs').readFileSync('$1').toString())$2"
+}
+
+veof() {
+    trap 'rm -f "$TMPFILE"' EXIT
+    TMPFILE=$(mktemp) || return 1
+    echo "Creating temp file $TMPFILE"
+    ${EDITOR} $TMPFILE
+    cat $TMPFILE
 }
