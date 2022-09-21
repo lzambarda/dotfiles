@@ -1,9 +1,4 @@
-# g-install: do NOT edit, see https://github.com/stefanmaric/g
-export GOPATH="$HOME/go";
-export GOROOT="$HOME/.go";
-
-export PATH="$GOPATH/bin:$PATH"; 
-export WANTED_GO_VERSION=1.19
+export WANTED_GO_VERSION=1.19.1
 
 setupgo() {
     if [ -z ${WANTED_GO_VERSION+x} ]; then
