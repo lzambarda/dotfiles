@@ -71,7 +71,7 @@ njq() {
         echo "Error, file does not exist or it is not a file: $1"
         return 1
     fi
-    node -p "JSON.parse(require('fs').readFileSync('$1').toString())$2"
+    node -p "process.stdout.write(JSON.stringify(JSON.parse(require('fs').readFileSync('$1').toString())$2)+'\n')"
 }
 
 veof() {
@@ -80,4 +80,48 @@ veof() {
     echo "Creating temp file $TMPFILE"
     ${EDITOR} $TMPFILE
     cat $TMPFILE
+}
+
+splitcsv() {
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo "Usage is: splitcsv <file> <rows per chunk>"
+        return 1
+    fi
+    if [ $# -ne "2" ]; then
+        echo "Error, usage is: splitcsv <file> <rows per chunk>"
+        return 1
+    fi
+    awk -v l=$2 '(NR==1){header=$0;next}
+                (NR%l==2) {
+                   close(f); 
+                   f=sprintf("%s.%0.5d.csv",FILENAME,++c)
+                   sub(/csv[.]/,"",f)
+                   print header > f
+                }
+                {print > f}' $1
+}
+
+mergecsv() {
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo "Usage is: mergecsv <files>"
+        return 1
+    fi
+    if [ $# -lt "1" ]; then
+        echo "Error, usage is: mergecsv <files>"
+        return 1
+    fi
+    first=true
+    output=""
+    for f in $@; do
+        if $first; then
+            first=false
+            output="merged_$f"
+            echo "merging to $output"
+            echo $f
+            cp $f $output
+        else
+            echo $f
+            tail -n+2 $f >> $output
+        fi
+    done
 }
