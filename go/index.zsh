@@ -1,4 +1,4 @@
-export WANTED_GO_VERSION=1.19.1
+export WANTED_GO_VERSION=1.19.5
 
 setupgo() {
     if [ -z ${WANTED_GO_VERSION+x} ]; then
