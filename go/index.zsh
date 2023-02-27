@@ -1,5 +1,4 @@
-export WANTED_GO_VERSION=1.19.5
-
+# WANTED_GO_VERSION should be specified inside private/index.zsh
 setupgo() {
     if [ -z ${WANTED_GO_VERSION+x} ]; then
         echo "dotfiles: WANTED_GO_VERSION not set, skipping\n"
