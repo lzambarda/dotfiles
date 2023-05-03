@@ -38,8 +38,6 @@ for file in $(find $DOTFILES -mindepth 2 -maxdepth 4 -not -path '*.git*' -name i
     source $file
 done
 
-setupgo
-
 # Code for once a day evaluation
 if [ ! -f $DOTFILES/onceaday ] || [ $(find $DOTFILES -mtime +0 -name "onceaday") ]; then
     touch -t $(date +%Y%m%d0000) $DOTFILES/onceaday # Set to beginning of today

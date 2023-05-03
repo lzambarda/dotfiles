@@ -1,30 +1,29 @@
-# WANTED_GO_VERSION should be specified inside private/index.zsh
-setupgo() {
-    if [ -z ${WANTED_GO_VERSION+x} ]; then
-        echo "dotfiles: WANTED_GO_VERSION not set, skipping\n"
-    else
-        g set $WANTED_GO_VERSION
-    fi
-}
-
 checkgo() {
-    latest_version=$(g list-all | tail -n2 | head -1 | tr -d '>' | tr -d '[:space:]')
-    if [ "$latest_version" = "$WANTED_GO_VERSION" ]; then
+    version=$(go version 2>/dev/null | cut -d' ' -f 3)
+    latest_version=$(curl -fsSL "https://golang.org/VERSION?m=text")
+    if [ "$latest_version" = "$version" ]; then
         return 0
     fi
-    read "choice?Go version $latest_version is available. Do you want to install it? (y/n): "
+    read "choice?Go version $latest_version is available. You have $version, do you want to install it? (y/n): "
     case "$choice" in
         y|Y|yes|YES ) echo "< yes";;
         n|N|no|NO ) echo "< no"; return 0;;
         * ) echo "Huh?"; return 0;;
     esac
-    # Update configfile
-    previous_version=$WANTED_GO_VERSION
-    sed -i '' "s/WANTED_GO_VERSION=$previous_version/WANTED_GO_VERSION=$latest_version/" ~/dotfiles/go/index.zsh
-    echo "Config updated, installing..."
-    export WANTED_GO_VERSION=$latest_version
-    g install $WANTED_GO_VERSION
-    g remove $previous_version
+    release_file="${latest_version}.darwin-amd64.tar.gz"
+    tmp=$(mktemp -d)
+    cd $tmp || exit 1
+
+    echo "Downloading https://go.dev/dl/$release_file ..." 
+    curl -OL https://go.dev/dl/$release_file
+    echo "Cleaning $GOPATH ..."
+    rm -rf $GOPATH 2>/dev/null
+    echo "Unpacking in $GOPATH ..."
+    tar -C $HOME -xzf $release_file
+    echo "Cleaning tmp ..."
+    rm -rf $tmp
+    version=$(go version 2>/dev/null | cut -d' ' -f 3)
+    echo "Now, local Go version is $version"
 }
 
 gocover () {
