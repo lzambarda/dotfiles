@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ $# -ne "2" ]; then
+  if [ $# -ne "3" ]; then
+    echo "Error, usage is: k zanmato <namespace> <resource type> [filter]"
+    exit 1
+  fi
+fi
+
+r=""
+if [ ! -z "$3" ]; then
+  r=$3
+fi
+
+kubectl delete -n $1 $2 $(kubectl get -n $1 $2 | grep -v NAME | grep $r | awk '{print $1}')
