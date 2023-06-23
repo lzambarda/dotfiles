@@ -11,6 +11,7 @@ checkgo() {
         * ) echo "Huh?"; return 0;;
     esac
     release_file="${latest_version}.darwin-amd64.tar.gz"
+    curr=$PWD
     tmp=$(mktemp -d)
     cd $tmp || exit 1
 
@@ -23,6 +24,7 @@ checkgo() {
     echo "Cleaning tmp ..."
     rm -rf $tmp
     version=$(go version 2>/dev/null | cut -d' ' -f 3)
+    cd $curr
     echo "Now, local Go version is $version"
 }
 
