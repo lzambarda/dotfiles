@@ -17,8 +17,8 @@ checkgo() {
 
     echo "Downloading https://go.dev/dl/$release_file ..." 
     curl -OL https://go.dev/dl/$release_file
-    echo "Cleaning $GOPATH ..."
-    rm -rf $GOPATH 2>/dev/null
+    #echo "Cleaning $GOPATH ..."
+    #rm -rf $GOPATH 2>/dev/null
     echo "Unpacking in $GOPATH ..."
     tar -C $HOME -xzf $release_file
     echo "Cleaning tmp ..."

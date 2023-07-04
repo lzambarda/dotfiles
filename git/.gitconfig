@@ -17,6 +17,12 @@
 	program = gpg2
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[diff]
+  wsErrorHighlight = all
+  tool = vimdiff3
+  algorithm = patience
+[merge]
+  tool = vimdiff
 [alias]
     st = status
     co = checkout
@@ -40,22 +46,14 @@
 		grep -v \\* | \
 		awk '{ print $1; }' | \
 		xargs git branch -D"
-	sync = "!git checkout master && \
-		git pull origin master && \
-		git fetch --prune --all && \
-		git branch -vv | \
-		grep ': gone]'| \
-		grep -v \\* | \
-		awk '{ print $1; }' | \
-		xargs git branch -D"
+		sync = "!f() { git checkout $1 && \
+			git pull origin $1 && \
+			git fetch --prune --all && \
+			git branch -vv | \
+			grep ': gone]'| \
+			grep -v \\* | \
+			awk '{ print $1; }' | \
+			xargs git branch -D; }; f"
     synctags = "!git tag -l | xargs git tag -d && git fetch --tags"
-    syncmain = "!git checkout main && \
-		git pull origin main && \
-		git fetch --prune --all && \
-		git branch -vv | \
-		grep ': gone]'| \
-		grep -v \\* | \
-		awk '{ print $1; }' | \
-		xargs git branch -D"
 [pull]
 	rebase = false
