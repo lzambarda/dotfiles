@@ -57,3 +57,5 @@
     synctags = "!git tag -l | xargs git tag -d && git fetch --tags"
 [pull]
 	rebase = false
+[push]
+	autoSetupRemote = true
