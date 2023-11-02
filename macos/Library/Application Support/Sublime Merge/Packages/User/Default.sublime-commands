@@ -2,7 +2,7 @@
 	{
 		"caption": "Sync",
 		"command": "git",
-  		"args": { "argv": ["sync"] }
+  		"args": { "argv": ["sync","$select_branch"] }
 	},
 	{
 		"caption": "Sync Fork",
