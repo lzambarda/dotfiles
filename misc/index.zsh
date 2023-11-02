@@ -26,7 +26,7 @@ kao() {
     emojis=(🚰 ☕️ 🥡 🍪 🍕 🍩 🍵 🥨 🍙 🌭 🍔 🥐 🥟 🥧 🍫 )
     index=$((1 + $RANDOM % ${#emojis[@]}))
     used=${emojis[$index]}
-    case "$((RANDOM % 2))" in
+    case "$((RANDOM % 3))" in
         "0")
         cat <<EOF
  ,00>${used}
