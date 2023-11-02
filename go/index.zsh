@@ -1,4 +1,5 @@
 checkgo() {
+    gobin="/usr/local"
     version=$(go version 2>/dev/null | cut -d' ' -f 3)
     latest_version=$(curl -fsSL "https://golang.org/VERSION?m=text" | head -n1)
     if [ "$latest_version" = "$version" ]; then
@@ -17,10 +18,8 @@ checkgo() {
 
     echo "Downloading https://go.dev/dl/$release_file ..." 
     curl -OL https://go.dev/dl/$release_file
-    echo "Cleaning $GOPATH ..."
-     find $GOPATH -mindepth 1 -maxdepth 1 | grep -v pkg | grep -v bin | xargs rm -rf 
-    echo "Unpacking in $GOPATH ..."
-    tar -C $HOME -xzf $release_file
+    echo "Unpacking in $gobin/go ..."
+    tar -C $gobin -xzf $release_file
     echo "Cleaning tmp ..."
     rm -rf $tmp
     version=$(go version 2>/dev/null | cut -d' ' -f 3)
