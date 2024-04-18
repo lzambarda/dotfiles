@@ -1,7 +1,7 @@
 alias k=kubectl
 
 function k_dirty() {
-	watch 'kubectl get po --all-namespaces | grep -v -e "1\/1\|2\/2\|3\/3\|4\/4\|5\/5" | grep -v Completed'
+	watch 'kubectl get po --all-namespaces | grep -v -e "1\/1\|2\/2\|3\/3\|4\/4\|5\/5\|6\/6" | grep -v Completed'
 }
 alias kdirty=k_dirty
 
@@ -17,15 +17,13 @@ function k_breakdown() {
     kubectl get po --all-namespaces -o=jsonpath="{range .items[*]}{.metadata.namespace}:{.metadata.name}{'\n'}{range .spec.containers[*]}  cpu req:{.resources.requests.cpu}{'\t'}  mem req:{.resources.requests.memory}{'\n'}{end}{end}"
 }
 
-# A better alternative is k rollout -n hendrix-staging-1 restart deployment.apps/orchestrator-queue
-function k_wipe_pods() {
-    if [ $# -ne "1" ]; then
-        echo "Error, usage is: k_wipe_pods <namespace>"
-        return 1
-    fi
-    for pod in $(kubectl get -n $1 pod | grep -oE "^[a-z0-9\-]+"); do
-        kubectl -n $1 delete --wait=false pod $pod
-    done
+function k_popn() {
+    kubectl get pods --all-namespaces | awk '{print $1}' | sort | uniq -c | sort -k1 -n -r
+}
+
+function k_pod_count() {
+    kubectl get pods -A -o json | jq -r '.items[].spec.nodeName' | awk '{a[$1]++} END{for (node in a) {print node" "a[node]}}'
+    kubectl get nodes -o json | jq '.items[] | {node: .metadata.name, type: .metadata.labels."node.kubernetes.io/instance-type", max:.status.allocatable.pods}'
 }
 
 export AWS_REGION=eu-west-1
