@@ -9,7 +9,7 @@ checkgo() {
         return 0
     fi
     # Silently exit if an error occurred
-    if [ -z "$last_version" ]; then
+    if [ -z "$latest_version" ]; then
         return 0
     fi
     read "choice?Go version $latest_version is available. You have $version, do you want to install it? (y/n): "
