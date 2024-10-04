@@ -23,7 +23,7 @@ loadenv() {
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 kao() {
-    emojis=(🚰 ☕️ 🥡 🍪 🍕 🍩 🍵 🥨 🍙 🌭 🍔 🥐 🥟 🥧 🍫 )
+    emojis=(🚰 ☕️ 🥡 🍪 🍕 🍩 🍵 🥨 🍙 🌭 🍔 🥐 🥟 🥧 🍫 🍜 🍛 🍱 🍡 )
     index=$((1 + $RANDOM % ${#emojis[@]}))
     used=${emojis[$index]}
     case "$((RANDOM % 3))" in
@@ -108,4 +108,8 @@ mergecsv() {
             tail -n+2 $f >> $output
         fi
     done
+}
+
+sshtest() {
+    diff <( ssh-keygen -y -e -f "$1" ) <( ssh-keygen -y -e -f "$2" )
 }
