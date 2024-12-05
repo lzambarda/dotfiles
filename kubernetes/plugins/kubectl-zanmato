@@ -11,4 +11,8 @@ if [ ! -z "$3" ]; then
   r=$3
 fi
 
+
+echo "Yojimbo: 斬魔刀 ..."
+
+
 kubectl delete -n $1 $2 $(kubectl get -n $1 $2 | grep -v NAME | grep $r | awk '{print $1}')
